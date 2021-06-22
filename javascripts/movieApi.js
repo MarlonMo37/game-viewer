@@ -5,7 +5,11 @@ class MovieApi {
     static fetchMovies() {
         fetch(this.url)
         .then(resp => resp.json())
-        .then(json => (json.forEach))
-        .catch(error => console.log(error))
+        .then(json => json.forEach(movie => {
+            Movie.findOrCreateBy(movie)
+        }))
+        .catch(this.handleError)
     }
+
+
 }
