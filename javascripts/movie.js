@@ -13,5 +13,17 @@ class Movie {
         Movie.all.push(this)
     }
 
+    static findByName(name) {
+        return this.all.find(function(movie) { movie.name === name})
+    }
+
+    static findById(id) {
+        return this.all.find(movie => movie.id === id)
+    }
+
+    static findOrCreateBy(movie) {
+        return this.findByName(movie.name) || new Movie(movie)
+    }
+
     
 }
