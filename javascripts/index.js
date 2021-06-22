@@ -1,17 +1,27 @@
 const movieButton = () => document.getElementById("movie-button")
-const buttonDiv = () => document.getElementById("button")
-const ulDiv = () => document.getElementById("list")
-const ulList = document.getElementById("movie-list")
+const genreButton = () => document.getElementById("genre-button")
+
+const buttonDiv = () => document.getElementById("buttons")
+
+const movies = () => document.getElementById("movies")
+const movieList = document.getElementById("movie-list")
+
+const genres = () => document.getElementById("genres")
+const genreList = document.getElementById("genre-list")
+
 
 document.addEventListener("DOMContentLoaded", () => {
     MovieApi.fetchMovies()
     GenreApi.fetchGenres()
-    movieButton().addEventListener("click", handleClick)
+    genreButton().addEventListener("click", handleGenreClick )
+    movieButton().addEventListener("click", handleMovieClick)
 })
 
-const handleClick = () => {
-    if (ulList.hasChildNodes()) {
-        ulList.innerText = ""
+const handleMovieClick = () => {
+    genreList.innerText = ""
+
+    if (movieList.hasChildNodes()) {
+        movieList.innerText = ""
     } else {
         Movie.all.forEach( movie => {
             const div = document.createElement("div")
@@ -32,7 +42,13 @@ const handleClick = () => {
                 </tr>  
             </table>
             `
-            ulList.appendChild(div) 
+            movieList.appendChild(div) 
         })
     }
+}
+
+const handleGenreClick = () => {
+    movieList.innerText = ""
+
+    
 }
