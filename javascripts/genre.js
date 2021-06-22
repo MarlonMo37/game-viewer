@@ -2,8 +2,9 @@ class Genre {
 
     static all = []
 
-    constructor(name) {
+    constructor({name, movies}) {
         this.name = name
+        this.movies = movies
         Genre.all.push(this)
     }
 
