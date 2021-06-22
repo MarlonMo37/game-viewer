@@ -2,7 +2,7 @@ class Movie {
 
     static all = []
 
-    constructor(audience_rating, genres, poster_url, release_date, reviews, summary, title) {
+    constructor({audience_rating, genres, poster_url, release_date, reviews, summary, title}) {
         this.audience_rating = audience_rating
         this.genres = genres
         this.poster_url = poster_url

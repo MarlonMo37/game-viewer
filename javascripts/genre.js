@@ -15,8 +15,8 @@ class Genre {
         return this.all.find(genre => genre.id === id)
     }
 
-    static findOrCreateBy(movie) {
-        return this.findByName(movie.name) || new Genre(genre)
+    static findOrCreateBy(genre) {
+        return this.findByName(genre.name) || new Genre(genre)
     }
     
 }

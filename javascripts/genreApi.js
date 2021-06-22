@@ -3,8 +3,9 @@ class GenreApi {
 
     static fetchGenres() {
         fetch(this.url)
-        .then(resp => resp.json)
-        .then (json => json.forEach(genre => {
+        .then(resp => resp.json())
+        .then (json => 
+            json.forEach(genre => {
             Genre.findOrCreateBy(genre)
         }))
         .catch(this.handleError)
