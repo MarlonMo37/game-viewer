@@ -13,16 +13,16 @@ const genreList = document.getElementById("genre-list")
 document.addEventListener("DOMContentLoaded", () => {
     MovieApi.fetchMovies()
     GenreApi.fetchGenres()
-    genreButton().addEventListener("click", handleGenreClick )
+    genreButton().addEventListener("click", handleGenresClick)
     movieButton().addEventListener("click", handleMovieClick)
 })
 
 const handleMovieClick = () => {
     genreList.innerText = ""
 
-    if (movieList.hasChildNodes()) {
-        movieList.innerText = ""
-    } else {
+    // if (movieList.hasChildNodes()) {
+    //     movieList.innerText = ""
+    // } else {
         Movie.all.forEach( movie => {
             const div = document.createElement("div")
         
@@ -44,23 +44,30 @@ const handleMovieClick = () => {
             `
             movieList.appendChild(div) 
         })
-    }
+    // }
 }
 
-const handleGenreClick = () => {
+const handleGenresClick = () => {
     movieList.innerText = ""
 
-    if (genreList.hasChildNodes()) {
+    if (!genreList.hasChildNodes() || document.getElementById("Comedy-genre")) {
         genreList.innerText = ""
-    } else {
+
         Genre.all.forEach( genre => {
             const div = document.createElement("div")
+            div.id = `${genre.name}-info`
 
-            div.innerHTML = `
-            <h2>${genre.name}</h2>
-            `
+            div.innerHTML = `<h2 id="${genre.name}-genre">${genre.name}</h2>`
+
+            div.addEventListener("click", genre.renderMovies)
+
             genreList.appendChild(div)
         })
-    }
+    } 
+    
+    // else {
+    //     genreList.innerText = ""
+    // }
 
 }
+
