@@ -50,5 +50,17 @@ const handleMovieClick = () => {
 const handleGenreClick = () => {
     movieList.innerText = ""
 
-    
+    if (genreList.hasChildNodes()) {
+        genreList.innerText = ""
+    } else {
+        Genre.all.forEach( genre => {
+            const div = document.createElement("div")
+
+            div.innerHTML = `
+            <h2>${genre.name}</h2>
+            `
+            genreList.appendChild(div)
+        })
+    }
+
 }
