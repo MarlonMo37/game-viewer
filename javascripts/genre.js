@@ -19,6 +19,25 @@ class Genre {
     static findOrCreateBy(genre) {
         return this.findByName(genre.name) || new Genre(genre)
     }
+
+    static handleGenresClick() {
+        movieList.innerText = ""
+    
+        if (!genreList.hasChildNodes() || !document.getElementById("genre-header")) {
+            genreList.innerText = ""
+    
+            Genre.all.forEach( genre => {
+                const div = document.createElement("div")
+                div.id = `${genre.name}-info`
+    
+                div.innerHTML = `<h2 id="genre-header">${genre.name}</h2>`
+    
+                div.addEventListener("click", genre.renderMovies)
+    
+                genreList.appendChild(div)
+            })
+        } 
+    }
     
     renderMovies = (e) => {
         genreList.innerText = ""

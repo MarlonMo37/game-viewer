@@ -2,7 +2,7 @@ class Movie {
 
     static all = []
 
-    constructor({audience_rating, genres, poster_url, release_date, reviews, summary, title}) {
+    constructor({audience_rating, genres, poster_url, release_date, reviews = [], summary, title}) {
         this.audience_rating = audience_rating
         this.genres = genres
         this.poster_url = poster_url
@@ -25,5 +25,36 @@ class Movie {
         return this.findByName(movie.name) || new Movie(movie)
     }
 
+    static handleMovieClick() {
+        genreList.innerText = ""
+        Movie.all.forEach( movie => {
+            const div = document.createElement("div")
+            
+            div.innerHTML = `
+            <table>
+                <tr>
+                    <th>
+                        <img src="${movie.poster_url}">
+                    </th>
+                    <td>
+                        <h2>${movie.title}</h2>
+                        <h3>Release Date: ${movie.release_date}</h3>
+                        <h3>Summary: ${movie.summary}</h3>
+                        <h3>Audience Rating: ${movie.audience_rating}/10<h3>
+                        <div id="movie-review-button">
+                        <button id="add-review-button">Add Review</button>
+                        </div
+    
+                    </td>
+                </tr>  
+            </table>
+            `
+                
+            movieList.appendChild(div) 
+            const reviewButton = () => document.getElementById("add-review-button")
+    
+            reviewButton().addEventListener("click", renderReviewForm)
+        })
+    }
     
 }
