@@ -21,9 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 
-const renderReviewForm = () => {
-    {debugger}
-}
 
 
 
