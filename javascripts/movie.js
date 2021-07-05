@@ -41,9 +41,9 @@ class Movie {
                         <h3>Release Date: ${movie.release_date}</h3>
                         <h3>Summary: ${movie.summary}</h3>
                         <h3>Audience Rating: ${movie.audience_rating}/10<h3>
-                        <div id="movie-review-button">
-                        <button id="add-review-button">Add Review</button>
-                        </div
+                        <div id="${movie.title}-review-button">
+                            <button class="add-review-button">Add Review</button>
+                        </div>
     
                     </td>
                 </tr>  
@@ -51,14 +51,75 @@ class Movie {
             `
                 
             movieList.appendChild(div) 
-            const reviewButton = () => document.getElementById("add-review-button")
+            // const reviewButton = () => document.getElementById("add-review-button")
     
-            reviewButton().addEventListener("click", renderReviewForm)
+            // reviewButton().addEventListener("click", movie.renderReviewForm)
         })
+        const all = document.querySelectorAll('.add-review-button')
+
+        all.forEach( button => {
+            button.addEventListener('click', Movie.renderReviewForm)
+        }
+        )
+       
     }
+        
+    
+    static renderReviewForm() {
+        const div = this.parentElement
+
+        div.innerHTML = `
+        <form id="review-form">
+            <label for="movie-review">Your Review</label>
+            <textarea></textarea><br></br>
+            <style>
+            .checked {
+                color: orange;
+            }
+            </style>
+            <div>
+                <label for="movie-stars">Star Rating 1-5</label>
+                    <div id>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+            </div>
+            <input type="submit">
+        </form>
+        `
+        const all = document.querySelectorAll('.fa')
+        all.forEach( star => {
+            star.addEventListener('click', Movie.fillStars)
+        })
+        reviewForm().addEventListener("submit", ReviewApi.handleSubmit)
+    }
+
+    static fillStars() {
+        this.nextElementSibling
+
+        const all = document.querySelectorAll('.fa')
+        all.forEach(star => {
+            star.classList.remove('checked')
+        })
+
+        this.classList.add('checked')
+        let node = this
+        do {
+            let newNode = node.previousElementSibling
+            newNode.classList.add('checked')
+            node = newNode
+        } while (node != null)
+
+
+    }
+
+
     
 }
 
-const renderReviewForm = () => {
-    {debugger}
-}
+
+
+
