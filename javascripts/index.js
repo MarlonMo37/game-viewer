@@ -11,7 +11,6 @@ const movieList = document.getElementById("movie-list")
 const genres = () => document.getElementById("genres")
 const genreList = document.getElementById("genre-list")
 
-const reviewForm = document.getElementById("review-form")
 
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -13,8 +13,8 @@ class Movie {
         Movie.all.push(this)
     }
 
-    static findByName(name) {
-        return this.all.find(function(movie) { movie.name === name})
+    static findByName(title) {
+        return this.all.find(function(movie) { movie.title === title})
     }
 
     static findById(id) {
@@ -28,32 +28,7 @@ class Movie {
     static handleMovieClick() {
         genreList.innerText = ""
         Movie.all.forEach( movie => {
-            const div = document.createElement("div")
-            
-            div.innerHTML = `
-            <table>
-                <tr>
-                    <th>
-                        <img src="${movie.poster_url}">
-                    </th>
-                    <td>
-                        <h2>${movie.title}</h2>
-                        <h3>Release Date: ${movie.release_date}</h3>
-                        <h3>Summary: ${movie.summary}</h3>
-                        <h3>Audience Rating: ${movie.audience_rating}/10<h3>
-                        <div id="${movie.title}-review-button">
-                            <button class="add-review-button">Add Review</button>
-                        </div>
-    
-                    </td>
-                </tr>  
-            </table>
-            `
-                
-            movieList.appendChild(div) 
-            // const reviewButton = () => document.getElementById("add-review-button")
-    
-            // reviewButton().addEventListener("click", movie.renderReviewForm)
+            movie.movieInfo()
         })
         const all = document.querySelectorAll('.add-review-button')
 
@@ -63,11 +38,47 @@ class Movie {
         )
        
     }
+
+    movieInfo() {
+        const div = document.createElement("div")
+            
+        div.innerHTML = `
+        <table>
+            <tr>
+                <th>
+                    <img src="${this.poster_url}">
+                </th>
+                <td>
+                    <h2>${this.title}</h2>
+                    <h3>Release Date: ${this.release_date}</h3>
+                    <h3>Summary: ${this.summary}</h3>
+                    <h3>Audience Rating: ${this.audience_rating}/10<h3>
+                    <div id="${this.title}-review-button">
+                        <button class="add-review-button">Add Review</button>
+                    </div>
+
+                </td>
+            </tr>  
+        </table>
+        `
+        // {debugger}
+        // let a = div.getElementsByClassName("add-review-button")
+
+        movieList.appendChild(div) 
+    }
         
     
     static renderReviewForm() {
+        // let form = document.getElementById("review-form")
+        // {debugger}
+        // if (form != null) {
+        //     form.remove()
+        //     movieList.innerHTML = ""
+        //     Movie.handleMovieClick()
+        //     {debugger}
+        // }
         const div = this.parentElement
-
+        
         div.innerHTML = `
         <form id="review-form">
             <label for="movie-review">Your Review</label>
@@ -79,7 +90,7 @@ class Movie {
             </style>
             <div>
                 <label for="movie-stars">Star Rating 1-5</label>
-                    <div id>
+                    <div id="stars">
                         <span class="fa fa-star"></span>
                         <span class="fa fa-star"></span>
                         <span class="fa fa-star"></span>
@@ -90,10 +101,13 @@ class Movie {
             <input type="submit">
         </form>
         `
+        let reviewForm = () => document.getElementById("review-form")
+
         const all = document.querySelectorAll('.fa')
         all.forEach( star => {
             star.addEventListener('click', Movie.fillStars)
         })
+        
         reviewForm().addEventListener("submit", ReviewApi.handleSubmit)
     }
 
@@ -112,8 +126,6 @@ class Movie {
             newNode.classList.add('checked')
             node = newNode
         } while (node != null)
-
-
     }
 
 
