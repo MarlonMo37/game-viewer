@@ -2,7 +2,7 @@ class Movie {
 
     static all = []
 
-    constructor({audience_rating, genres, poster_url, release_date, reviews = [], summary, title}) {
+    constructor({audience_rating, genres, poster_url, release_date, reviews = [], summary, title, id}) {
         this.audience_rating = audience_rating
         this.genres = genres
         this.poster_url = poster_url
@@ -10,6 +10,7 @@ class Movie {
         this.reviews = reviews
         this.summary = summary
         this.title = title
+        this.id = id
         Movie.all.push(this)
     }
 
@@ -29,13 +30,16 @@ class Movie {
         genreList.innerText = ""
         Movie.all.forEach( movie => {
             movie.movieInfo()
+            let movieId = `${movie.id}`
+            let theButton = () => document.getElementById(movieId)
+            theButton().addEventListener('click', movie.renderReviewForm)
         })
-        const all = document.querySelectorAll('.add-review-button')
+        // const all = document.querySelectorAll('.add-review-button')
 
-        all.forEach( button => {
-            button.addEventListener('click', Movie.renderReviewForm)
-        }
-        )
+        // all.forEach( button => {
+        //     button.addEventListener('click', Movie.renderReviewForm)
+        // }
+        // )
        
     }
 
@@ -43,7 +47,7 @@ class Movie {
         const div = document.createElement("div")
             
         div.innerHTML = `
-        <table>
+        <table id="${this.id}">
             <tr>
                 <th>
                     <img src="${this.poster_url}">
@@ -68,7 +72,8 @@ class Movie {
     }
         
     
-    static renderReviewForm() {
+    renderReviewForm() {
+        
         // let form = document.getElementById("review-form")
         // {debugger}
         // if (form != null) {
@@ -77,10 +82,11 @@ class Movie {
         //     Movie.handleMovieClick()
         //     {debugger}
         // }
-        const div = this.parentElement
-        
+        const div = this.querySelector(".add-review-button").parentElement
+       {debugger}
         div.innerHTML = `
         <form id="review-form">
+            <input type="hidden" value="${this.id}">
             <label for="movie-review">Your Review</label>
             <textarea></textarea><br></br>
             <style>

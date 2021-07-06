@@ -12,24 +12,27 @@ class ReviewApi {
     }
 
     static handleSubmit(e) {
-        {debugger}
         e.preventDefault()
-        const date = {
+        const data = {
             "written_review": this.querySelector("textarea").value,
-            "rating": ReviewApi.getRating(this)
-        }
+            "rating": ReviewApi.getRating(this),
+            "movie_id": this.querySelector("input").value
+
+        }   
+        {debugger}
     }
 
     static getRating(div){
         let ratingStars = () => div.querySelectorAll(".fa")
         let actualRating = 0 
         for(let i = 0; i < ratingStars().length; ++i) {
-            {debugger}
             if ([...ratingStars()[i].classList].includes('checked')){
                 actualRating++
             }
         }
         return actualRating   
     }
+
+
 
 }
