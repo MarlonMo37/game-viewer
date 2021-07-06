@@ -14,6 +14,10 @@ class Movie {
         Movie.all.push(this)
     }
 
+    getReviews() {
+        {debugger}
+    }
+
     static findByName(title) {
         return this.all.find(function(movie) { movie.title === title})
     }
@@ -57,6 +61,13 @@ class Movie {
                     <h3>Release Date: ${this.release_date}</h3>
                     <h3>Summary: ${this.summary}</h3>
                     <h3>Audience Rating: ${this.audience_rating}/10<h3>
+                    <h3>Reviews:</h3>
+                    <h3>
+                    <script>
+                        this.getReviews()
+                    </script>
+                    </h3>
+
                     <div id="${this.title}-review-button">
                         <button class="add-review-button">Add Review</button>
                     </div>
@@ -83,7 +94,7 @@ class Movie {
         //     {debugger}
         // }
         const div = this.querySelector(".add-review-button").parentElement
-       {debugger}
+
         div.innerHTML = `
         <form id="review-form">
             <input type="hidden" value="${this.id}">
