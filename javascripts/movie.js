@@ -14,9 +14,7 @@ class Movie {
         Movie.all.push(this)
     }
 
-    getReviews() {
-        {debugger}
-    }
+   
 
     static findByName(title) {
         return this.all.find(function(movie) { movie.title === title})
@@ -34,17 +32,14 @@ class Movie {
         genreList.innerText = ""
         Movie.all.forEach( movie => {
             movie.movieInfo()
-            let movieId = `${movie.id}`
+            let movieId = `${movie.title}-review-button`
+            let reviewId = `${movie.title}-reviews-button`
             let theButton = () => document.getElementById(movieId)
+            let reviewsButton = () => document.getElementById(reviewId)
             theButton().addEventListener('click', movie.renderReviewForm)
+            reviewsButton().addEventListener('click', function(){movie.getReviews(movie)})
+            // {debugger}
         })
-        // const all = document.querySelectorAll('.add-review-button')
-
-        // all.forEach( button => {
-        //     button.addEventListener('click', Movie.renderReviewForm)
-        // }
-        // )
-       
     }
 
     movieInfo() {
@@ -62,11 +57,11 @@ class Movie {
                     <h3>Summary: ${this.summary}</h3>
                     <h3>Audience Rating: ${this.audience_rating}/10<h3>
                     <h3>Reviews:</h3>
-                    <h3>
-                    <script>
-                        this.getReviews()
-                    </script>
-                    </h3>
+                    
+
+                    <div id="${this.title}-reviews-button">
+                        <button class="show-reviews-button">Show Reviews</button>
+                    </div>
 
                     <div id="${this.title}-review-button">
                         <button class="add-review-button">Add Review</button>
@@ -76,14 +71,38 @@ class Movie {
             </tr>  
         </table>
         `
-        // {debugger}
-        // let a = div.getElementsByClassName("add-review-button")
+
 
         movieList.appendChild(div) 
     }
-        
-    
+
+    getReviews() {
+        let reviewId = `${this.title}-reviews-button`
+        let reviewsButton = () => document.getElementById(reviewId)
+        reviewsButton().nextElementSibling.innerHTML = `
+            <button class="add-review-button">Add Review</button>
+        `
+        reviewsButton().innerHTML = ""
+        if (this.reviews.length != 0) {
+            this.reviews.forEach(review => {
+                let reviewInfo = `
+                    <h3>${review.written_review}</h3>
+                    <h3>${review.rating}/5</h3>
+                `
+                reviewsButton().innerHTML += reviewInfo
+            })
+        } else {
+            reviewsButton().innerHTML = `
+            <h3>Sorry, but this movie doesn't have any reviews yet.
+            `
+        }
+    }
+
     renderReviewForm() {
+       
+        this.previousElementSibling.innerHTML = `
+            <button class="show-reviews-button">Show Reviews</button>
+        `
         
         // let form = document.getElementById("review-form")
         // {debugger}
