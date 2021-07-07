@@ -31,11 +31,14 @@ class Movie {
     static handleMovieClick() {
         genreList.innerText = ""
         Movie.all.forEach( movie => {
-            movie.movieInfo()
+            let div = movie.movieInfo()
+            movieList.appendChild(div)
+
             let movieId = `${movie.title}-review-button`
             let reviewId = `${movie.title}-reviews-button`
             let theButton = () => document.getElementById(movieId)
             let reviewsButton = () => document.getElementById(reviewId)
+
             theButton().addEventListener('click', movie.renderReviewForm)
             reviewsButton().addEventListener('click', function(){movie.getReviews(movie)})
             // {debugger}
@@ -71,9 +74,7 @@ class Movie {
             </tr>  
         </table>
         `
-
-
-        movieList.appendChild(div) 
+        return div
     }
 
     getReviews() {
@@ -99,19 +100,10 @@ class Movie {
     }
 
     renderReviewForm() {
-       
         this.previousElementSibling.innerHTML = `
             <button class="show-reviews-button">Show Reviews</button>
         `
         
-        // let form = document.getElementById("review-form")
-        // {debugger}
-        // if (form != null) {
-        //     form.remove()
-        //     movieList.innerHTML = ""
-        //     Movie.handleMovieClick()
-        //     {debugger}
-        // }
         const div = this.querySelector(".add-review-button").parentElement
 
         div.innerHTML = `

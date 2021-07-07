@@ -50,27 +50,20 @@ class Genre {
 
         this.movies.forEach( movie => {
             const movieDiv = document.createElement("div")
-           
-        
-           
-
-            movieDiv.innerHTML =`
-            <table>
-                <tr>
-                    <th>
-                        <img src="${movie.poster_url}">
-                    </th>
-                    <td>
-                        <h2>${movie.title}</h2>
-                        <h3>Release Date: ${movie.release_date}</h3>
-                        <h3>Summary: ${movie.summary}</h3>
-                        <h3>Audience Rating: ${movie.audience_rating}/10<h3>
-
-                    </td>
-                </tr>  
-            </table>
-            `
+            let actualMovie = () => Movie.findById(movie.id)
+          
+            movieDiv.innerHTML = `${actualMovie().movieInfo().innerHTML}`
             genreList.appendChild(movieDiv)
+
+            let movieId = `${movie.title}-review-button`
+            let reviewId = `${movie.title}-reviews-button`
+            let theButton = () => document.getElementById(movieId)
+            let reviewsButton = () => document.getElementById(reviewId)
+            
+            theButton().addEventListener('click', actualMovie().renderReviewForm)
+            reviewsButton().addEventListener('click', function(){actualMovie().getReviews(movie)})
+
+
         })
     }
 }
