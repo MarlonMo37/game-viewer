@@ -41,7 +41,12 @@ class Genre {
     
     renderMovies = (e) => {
         genreList.innerText = ""
-        genreList.innerHTML = `<h2 id="${this.name}-genre">${this.name}</h2>`
+        genreList.innerHTML = `
+            <h2 id="${this.name}-genre">${this.name}</h2>
+            <button id="return-genres">Go Back to Genres</button>
+        `
+        let returnButton = () => document.getElementById("return-genres")
+        returnButton().addEventListener("click", Genre.handleGenresClick)
 
         this.movies.forEach( movie => {
             const movieDiv = document.createElement("div")
