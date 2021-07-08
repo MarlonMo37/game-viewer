@@ -37,47 +37,54 @@ class Review {
             accumulator[review.movie_id] = [...accumulator[review.movie_id] || [], review]
             return accumulator    
         }, {})
-        
-        {debugger}
-        for (let i = 0; i < Object.keys(groups).length; ++i) {
-            let movie = Movie.findById(Number(Object.keys(groups)[i]))
-            let div = document.createElement('div')
-            {debugger}
-            div.innerHTML = `
-            <table id="${movie.id}">
-                <tr>
-                    <th>
-                        <img src="${movie.poster_url}">
-                    </th>
-                    <td>
-                        <h2>${movie.title}</h2>
-                        <h3>Release Date: ${movie.release_date}</h3>
-                        <h3>Summary: ${movie.summary}</h3>
-                        <h3>Audience Rating: ${movie.audience_rating}/10<h3>
-                        <h3>Reviews:</h3>
-                        
-                        <div id="your-${movie.title}-reviews">
-                        </div>
-                        
 
-                    </td>
-                </tr>  
-            </table>
-            `
-            groups[Object.keys(groups)[i]].forEach( review =>{
-                let id = `your-${movie.title}-reviews`
-                let reviewDiv = document.createElement('div')
-                let movieReviewsDiv = document.getElementById(id)
+        if (Object.keys(groups).length > 0) {
+            for (let i = 0; i < Object.keys(groups).length; ++i) {
+                let movie = Movie.findById(Number(Object.keys(groups)[i]))
+                let div = document.createElement('div')
                 {debugger}
-                reviewDiv.innerHTML = `
-                    <<h3>${review.written_review}</h3>
-                    <h3>${review.rating}/5</h3>
-                `
-                movieReviewsDiv.innerHTML += reviewDiv
-            })
+                div.innerHTML = `
+                <table id="${movie.id}">
+                    <tr>
+                        <th>
+                            <img src="${movie.poster_url}">
+                        </th>
+                        <td>
+                            <h2>${movie.title}</h2>
+                            <h3>Release Date: ${movie.release_date}</h3>
+                            <h3>Summary: ${movie.summary}</h3>
+                            <h3>Audience Rating: ${movie.audience_rating}/10<h3>
+                            <h3>Reviews:</h3>
+                            
+                            <div id="your-${movie.title}-reviews">
+                            </div>
+                            
 
-            reviewsList.append(div)
+                        </td>
+                    </tr>  
+                </table>
+                `
+                reviewsList.append(div)
+
+                groups[Object.keys(groups)[i]].forEach( review =>{
+                    let id = `your-${movie.title}-reviews`
+                    let reviewDiv = document.createElement('div')
+                    let movieReviewsDiv = document.getElementById(id)
+                    {debugger}
+                    reviewDiv.innerHTML = `
+                        <h3>${review.written_review}</h3>
+                        <h3>${review.rating}/5</h3>
+                    `
+                    movieReviewsDiv.append(reviewDiv)
+            })}
+        } else {
+            let div = `
+                <h2>Sorry, but you dont have any reviews right now. Go write some!!!</h2>
+            `
+            reviewsList.innerHTML += div
         }
+            
+        
 
 
         
