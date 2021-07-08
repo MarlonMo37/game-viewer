@@ -27,6 +27,9 @@ class Movie {
     static findOrCreateBy(movie) {
         return this.findByName(movie.name) || new Movie(movie)
     }
+    getAllReviews() {
+        return Review.all.filter(review => review.movie_id === this.id)
+    }
 
     static handleMovieClick() {
         
@@ -39,7 +42,7 @@ class Movie {
             let movieId = `${movie.title}-review-button`
             let reviewId = `${movie.title}-reviews-button`
             let theButton = () => document.getElementById(movieId).children[0]
-            let reviewsButton = () => document.getElementById(reviewId)
+            let reviewsButton = () => document.getElementById(reviewId).children[0]
             // {debugger}
 
             theButton().addEventListener('click', function(){movie.renderReviewForm(movie)})
@@ -88,16 +91,19 @@ class Movie {
         //    <button class="add-review-button">Add Review</button>
         // `
         // reviewsButton().nextElementSibling.addEventListener("click", this.renderReviewForm)
-        
+        {debugger}
         reviewsButton().innerHTML = ""
-        if (this.reviews.length != 0) {
-            this.reviews.forEach(review => {
+        let reviews = document.createElement('div')
+        reviews.id = `${this.id}-reviews`
+        if (this.getAllReviews().length != 0) {
+            this.getAllReviews().forEach(review => {
                 let reviewInfo = `
                     <h3>${review.written_review}</h3>
                     <h3>${review.rating}/5</h3>
                 `
-                reviewsButton().innerHTML += reviewInfo
+               reviews.innerHTML += reviewInfo
             })
+             reviewsButton().append(reviews)
         } else {
             reviewsButton().innerHTML = `
             <h3>Sorry, but this movie doesn't have any reviews yet.
@@ -148,7 +154,6 @@ class Movie {
         })
 
         reviewForm().addEventListener("click", ReviewApi.handleSubmit)
-        {debugger}
     }
 
     static fillStars() {

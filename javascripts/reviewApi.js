@@ -12,7 +12,7 @@ class ReviewApi {
     }
 
     static handleSubmit(e) {
-        {debugger}
+        
         e.preventDefault()
         let form = this.parentElement
         const data = {
@@ -20,7 +20,7 @@ class ReviewApi {
             "rating": ReviewApi.getRating(form),
             "movie_id": form.querySelector("input").value
         }
-        {debugger}
+       
         fetch(ReviewApi.url, {
             method: 'POST',
             headers: {
@@ -31,9 +31,18 @@ class ReviewApi {
         })
         .then(resp => resp.json())
         .then(json => {
-            let review = new Review(json)
-        })   
-        this
+            {debugger}
+            let date = {
+                written_review: json["written_review"],
+                id: json["id"],
+                movie_id: json["movie"].id,
+                rating: json["rating"]
+            }
+            let review = new Review(date)
+            form.reset()
+            review.render()
+            {debugger}  
+        })        
     }
 
     // static handle
