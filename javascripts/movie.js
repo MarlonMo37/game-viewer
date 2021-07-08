@@ -32,8 +32,8 @@ class Movie {
     }
 
     static handleMovieClick() {
-        
-        genreList.innerText = ""
+        clearLists()
+        // genreList.innerText = ""
         
         Movie.all.forEach( movie => {
             let div = movie.movieInfo()

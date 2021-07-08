@@ -11,6 +11,9 @@ const movieList = document.getElementById("movie-list")
 const genres = () => document.getElementById("genres")
 const genreList = document.getElementById("genre-list")
 
+const reviews = () => document.getElementById("reviews")
+const reviewsList = document.getElementById("reviews-list")
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -21,6 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
     movieButton().addEventListener("click", Movie.handleMovieClick)
     reviewButton().addEventListener("click", Review.handleReviewsClick)
 })
+
+function clearLists() {
+    genreList.innerText = ""
+    reviewsList.innerText = ""
+    movieList.innerText = ""
+}
 
 
 

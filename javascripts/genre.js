@@ -22,6 +22,7 @@ class Genre {
 
     static handleGenresClick() {
         movieList.innerText = ""
+        clearLists()
     
         if (!genreList.hasChildNodes() || !document.getElementById("genre-header")) {
             genreList.innerText = ""

@@ -30,6 +30,11 @@ class Review {
         }
     }
 
+    static handleReviewsClick() {
+        {debugger}
+        clearLists()
+    }
+
 
 
 
