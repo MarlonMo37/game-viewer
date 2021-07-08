@@ -112,7 +112,7 @@ class Movie {
     }
 
     renderReviewForm(movie) {
-        // {debugger}
+        {debugger}
         // this.parentElement.previousElementSibling.innerHTML = `
         //     <button class="show-reviews-button">Show Reviews</button>
         // `
@@ -122,7 +122,7 @@ class Movie {
         
         // const div = this.parentElement.parentElement
         
-        
+        {debugger}
         div.innerHTML = `
         <form id="review-form">
             <input type="hidden" value="${this.id}">

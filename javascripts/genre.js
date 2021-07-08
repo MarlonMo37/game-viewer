@@ -57,11 +57,12 @@ class Genre {
 
             let movieId = `${movie.title}-review-button`
             let reviewId = `${movie.title}-reviews-button`
-            let theButton = () => document.getElementById(movieId)
-            let reviewsButton = () => document.getElementById(reviewId)
+            let theButton = () => document.getElementById(movieId).children[0]
+            let reviewsButton = () => document.getElementById(reviewId).children[0]
             
-            theButton().addEventListener('click', actualMovie().renderReviewForm)
-            reviewsButton().addEventListener('click', function(){actualMovie().getReviews(movie)})
+            
+            theButton().addEventListener('click', function(){actualMovie().renderReviewForm(movie)})
+            reviewsButton().addEventListener('click', function(){actualMovie().getReviews()})
 
 
         })

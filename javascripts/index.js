@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     GenreApi.fetchGenres()
     genreButton().addEventListener("click", Genre.handleGenresClick)
     movieButton().addEventListener("click", Movie.handleMovieClick)
+    reviewButton().addEventListener("click", Review.handleReviewsClick)
 })
 
 
