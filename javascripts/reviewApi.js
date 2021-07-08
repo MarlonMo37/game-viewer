@@ -12,12 +12,14 @@ class ReviewApi {
     }
 
     static handleSubmit(e) {
+        {debugger}
         e.preventDefault()
+        let form = this.parentElement
         const data = {
-            "written_review": this.querySelector("textarea").value,
-            "rating": ReviewApi.getRating(this),
-            "movie_id": this.querySelector("input").value
-        } 
+            "written_review": form.querySelector("textarea").value,
+            "rating": ReviewApi.getRating(form),
+            "movie_id": form.querySelector("input").value
+        }
         {debugger}
         fetch(ReviewApi.url, {
             method: 'POST',
@@ -31,8 +33,10 @@ class ReviewApi {
         .then(json => {
             let review = new Review(json)
         })   
-    
+        this
     }
+
+    // static handle
 
     static getRating(div){
         let ratingStars = () => div.querySelectorAll(".fa")

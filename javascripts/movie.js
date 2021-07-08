@@ -29,19 +29,21 @@ class Movie {
     }
 
     static handleMovieClick() {
+        
         genreList.innerText = ""
+        
         Movie.all.forEach( movie => {
             let div = movie.movieInfo()
             movieList.appendChild(div)
 
             let movieId = `${movie.title}-review-button`
             let reviewId = `${movie.title}-reviews-button`
-            let theButton = () => document.getElementById(movieId)
+            let theButton = () => document.getElementById(movieId).children[0]
             let reviewsButton = () => document.getElementById(reviewId)
-
-            theButton().addEventListener('click', movie.renderReviewForm)
-            reviewsButton().addEventListener('click', function(){movie.getReviews(movie)})
             // {debugger}
+
+            theButton().addEventListener('click', function(){movie.renderReviewForm(movie)})
+            reviewsButton().addEventListener('click', function(){movie.getReviews(movie)})
         })
     }
 
@@ -67,6 +69,7 @@ class Movie {
                     </div>
 
                     <div id="${this.title}-review-button">
+
                         <button class="add-review-button">Add Review</button>
                     </div>
 
@@ -80,9 +83,12 @@ class Movie {
     getReviews() {
         let reviewId = `${this.title}-reviews-button`
         let reviewsButton = () => document.getElementById(reviewId)
-        reviewsButton().nextElementSibling.innerHTML = `
-            <button class="add-review-button">Add Review</button>
-        `
+        // // {debugger}
+        // reviewsButton().nextElementSibling.innerHTML = `
+        //    <button class="add-review-button">Add Review</button>
+        // `
+        // reviewsButton().nextElementSibling.addEventListener("click", this.renderReviewForm)
+        
         reviewsButton().innerHTML = ""
         if (this.reviews.length != 0) {
             this.reviews.forEach(review => {
@@ -99,13 +105,18 @@ class Movie {
         }
     }
 
-    renderReviewForm() {
-        this.previousElementSibling.innerHTML = `
-            <button class="show-reviews-button">Show Reviews</button>
-        `
+    renderReviewForm(movie) {
+        // {debugger}
+        // this.parentElement.previousElementSibling.innerHTML = `
+        //     <button class="show-reviews-button">Show Reviews</button>
+        // `
+      
+        let divId = `${this.title}-review-button`
+        let div = document.getElementById(divId)
         
-        const div = this.querySelector(".add-review-button").parentElement
-
+        // const div = this.parentElement.parentElement
+        
+        
         div.innerHTML = `
         <form id="review-form">
             <input type="hidden" value="${this.id}">
@@ -126,17 +137,18 @@ class Movie {
                         <span class="fa fa-star"></span>
                     </div>
             </div>
-            <input type="submit">
+            <input type="submit" id="form-submit">
         </form>
         `
-        let reviewForm = () => document.getElementById("review-form")
+        let reviewForm = () => document.getElementById("form-submit")
 
         const all = document.querySelectorAll('.fa')
         all.forEach( star => {
             star.addEventListener('click', Movie.fillStars)
         })
-        
-        reviewForm().addEventListener("submit", ReviewApi.handleSubmit)
+
+        reviewForm().addEventListener("click", ReviewApi.handleSubmit)
+        {debugger}
     }
 
     static fillStars() {
