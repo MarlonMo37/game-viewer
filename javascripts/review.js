@@ -31,8 +31,17 @@ class Review {
     }
 
     static handleReviewsClick() {
-        {debugger}
+        // {debugger}
         clearLists()
+        let groups = Review.all.reduce((r, a) => {
+            console.log("a", a);
+            console.log('r', r)
+            r[Movie.findById(a.movie_id).title] = [...r[Movie.findById(a.movie_id).title] || [], a]
+            return r
+           
+        }, {})
+        
+        {debugger}
     }
 
 
