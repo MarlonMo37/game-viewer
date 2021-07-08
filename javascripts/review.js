@@ -33,13 +33,53 @@ class Review {
     static handleReviewsClick() {
         // {debugger}
         clearLists()
-        let groups = Review.all.reduce((r, a) => {
-            console.log("a", a);
-            console.log('r', r)
-            r[Movie.findById(a.movie_id).title] = [...r[Movie.findById(a.movie_id).title] || [], a]
-            return r
-           
+        let groups = Review.all.reduce((accumulator, review) => {     
+            accumulator[review.movie_id] = [...accumulator[review.movie_id] || [], review]
+            return accumulator    
         }, {})
+        
+        {debugger}
+        for (let i = 0; i < Object.keys(groups).length; ++i) {
+            let movie = Movie.findById(Number(Object.keys(groups)[i]))
+            let div = document.createElement('div')
+            {debugger}
+            div.innerHTML = `
+            <table id="${movie.id}">
+                <tr>
+                    <th>
+                        <img src="${movie.poster_url}">
+                    </th>
+                    <td>
+                        <h2>${movie.title}</h2>
+                        <h3>Release Date: ${movie.release_date}</h3>
+                        <h3>Summary: ${movie.summary}</h3>
+                        <h3>Audience Rating: ${movie.audience_rating}/10<h3>
+                        <h3>Reviews:</h3>
+                        
+                        <div id="your-${movie.title}-reviews">
+                        </div>
+                        
+
+                    </td>
+                </tr>  
+            </table>
+            `
+            groups[Object.keys(groups)[i]].forEach( review =>{
+                let id = `your-${movie.title}-reviews`
+                let reviewDiv = document.createElement('div')
+                let movieReviewsDiv = document.getElementById(id)
+                {debugger}
+                reviewDiv.innerHTML = `
+                    <<h3>${review.written_review}</h3>
+                    <h3>${review.rating}/5</h3>
+                `
+                movieReviewsDiv.innerHTML += reviewDiv
+            })
+
+            reviewsList.append(div)
+        }
+
+
         
         {debugger}
     }
