@@ -12,7 +12,7 @@ class ReviewApi {
     }
 
     static handleSubmit(e) {
-        {debugger}
+  
         e.preventDefault()
         let form = this.parentElement
         const data = {
@@ -63,18 +63,18 @@ class ReviewApi {
         })
         .then(resp => resp.json())
         .then(json => {
-            {debugger}
+           
             let review = Review.findById(json.id)
-            {debugger}
+           
             let updateReview = review.update(json)
-            {debugger}
+   
             updateReview.replaceReview(form)
         })
-        {debugger}
+    
     }
 
     static handleFetchDelete(e) {
-        {debugger}
+     
         fetch(`${ReviewApi.url}/${this.parentElement.querySelector("input").value}`, {
             method: 'DELETE',
             headers: {
