@@ -48,8 +48,11 @@ class Review {
         <button id="delete-${this.id}-review">Delete Review</button>
         `
         let reviewId = `edit-${this.id}-review`
+        let deleteReviewId = `delete-${this.id}-review`
+        let deleteButton = () => document.getElementById(deleteReviewId)
         let shownReview = () => document.getElementById(reviewId)
         shownReview().addEventListener("click", Review.handleUpdate)
+        deleteButton().addEventListener("click", ReviewApi.handleFetchDelete)
     }
 
     static handleReviewsClick() {
@@ -103,8 +106,11 @@ class Review {
                     `
                     movieReviewsDiv.append(reviewDiv)
                     let reviewId = `edit-${review.id}-review`
+                    let deleteButtonId = `delete-${review.id}-review`
                     let shownReview = () => document.getElementById(reviewId)
+                    let deleteButton = () => document.getElementById(deleteButtonId)
                     shownReview().addEventListener("click", Review.handleUpdate)
+                    deleteButton().addEventListener("click", ReviewApi.handleFetchDelete)
             })}
         } else {
             let div = `

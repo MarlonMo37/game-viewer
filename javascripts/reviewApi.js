@@ -73,48 +73,9 @@ class ReviewApi {
         {debugger}
     }
 
-    // static handleUpdate(e) {
-    //     // {debugger}
-    //     let id = this.parentElement.querySelector("input").value
-    //     let writtenReview = this.parentElement.firstElementChild.innerText
-    //     let reviewRating = this.parentElement.firstElementChild.nextElementSibling.innerText.slice(0,1)
-
-    //     let form = this.parentElement
-
-    //     form.innerHTML = `
-    //     <form id="review-form">
-    //         <input type="hidden" value="${id}">
-    //         <label for="movie-review">Your Review</label>
-    //         <textarea>${writtenReview}</textarea><br></br>
-    //         <style>
-    //         .checked {
-    //             color: orange;
-    //         }
-    //         </style>
-    //         <div>
-    //             <label for="movie-stars">Star Rating 1-5</label>
-    //                 <div id="stars">
-    //                     <span class="fa fa-star"></span>
-    //                     <span class="fa fa-star"></span>
-    //                     <span class="fa fa-star"></span>
-    //                     <span class="fa fa-star"></span>
-    //                     <span class="fa fa-star"></span>
-    //                 </div>
-    //         </div>
-    //         <input type="submit" id="update-review-button">
-    //     </form>
-    //     `
-    //     const all = document.querySelectorAll('.fa')
-    //     all.forEach( star => {
-    //         star.addEventListener('click', Movie.fillStars)
-    //     })
-    //     let button = form.querySelector('#update-review-button')
-    //     button.addEventListener('click', )
-    //     {debugger}
-        
-            
-    //     // const data
-    // }
+    static handleFetchDelete() {
+        {debugger}
+    }
 
     static getRating(div){
         let ratingStars = () => div.querySelectorAll(".fa")
