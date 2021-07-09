@@ -91,7 +91,7 @@ class Movie {
         //    <button class="add-review-button">Add Review</button>
         // `
         // reviewsButton().nextElementSibling.addEventListener("click", this.renderReviewForm)
-        {debugger}
+        // {debugger}
         reviewsButton().innerHTML = ""
         let reviews = document.createElement('div')
         reviews.id = `${this.id}-reviews`
@@ -112,7 +112,7 @@ class Movie {
     }
 
     renderReviewForm(movie) {
-        {debugger}
+        // {debugger}
         // this.parentElement.previousElementSibling.innerHTML = `
         //     <button class="show-reviews-button">Show Reviews</button>
         // `
@@ -122,7 +122,7 @@ class Movie {
         
         // const div = this.parentElement.parentElement
         
-        {debugger}
+        // {debugger}
         div.innerHTML = `
         <form id="review-form">
             <input type="hidden" value="${this.id}">
@@ -152,8 +152,9 @@ class Movie {
         all.forEach( star => {
             star.addEventListener('click', Movie.fillStars)
         })
-
-        reviewForm().addEventListener("click", ReviewApi.handleSubmit)
+        // {debugger}
+        reviewForm().addEventListener('click', ReviewApi.handleSubmit)
+        // {debugger}
     }
 
     static fillStars() {

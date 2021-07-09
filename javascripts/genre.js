@@ -65,7 +65,7 @@ class Genre {
             theButton().addEventListener('click', function(){actualMovie().renderReviewForm(movie)})
             reviewsButton().addEventListener('click', function(){actualMovie().getReviews()})
 
-
+            // {debugger}
         })
     }
 }

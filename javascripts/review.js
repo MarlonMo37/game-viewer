@@ -42,7 +42,7 @@ class Review {
             for (let i = 0; i < Object.keys(groups).length; ++i) {
                 let movie = Movie.findById(Number(Object.keys(groups)[i]))
                 let div = document.createElement('div')
-                {debugger}
+                // {debugger}
                 div.innerHTML = `
                 <table id="${movie.id}">
                     <tr>
@@ -70,27 +70,71 @@ class Review {
                     let id = `your-${movie.title}-reviews`
                     let reviewDiv = document.createElement('div')
                     let movieReviewsDiv = document.getElementById(id)
-                    {debugger}
+                    // {debugger}
                     reviewDiv.innerHTML = `
                         <h3>${review.written_review}</h3>
                         <h3>${review.rating}/5</h3>
+                        <input type="hidden" value="${review.id}">
+
+                        <button id="edit-${review.id}-review">Edit Review</button>
+                        <button id="delete-${review.id}-review">Delete Review</button>
                     `
                     movieReviewsDiv.append(reviewDiv)
+                    let reviewId = `edit-${review.id}-review`
+                    let shownReview = () => document.getElementById(reviewId)
+                    shownReview().addEventListener("click", Review.handleUpdate)
             })}
         } else {
             let div = `
                 <h2>Sorry, but you dont have any reviews right now. Go write some!!!</h2>
             `
             reviewsList.innerHTML += div
-        }
-            
-        
-
-
-        
-        {debugger}
+        }        
+        // {debugger}
     }
 
+    static handleUpdate(e) {
+        // {debugger}
+        let id = this.parentElement.querySelector("input").value
+        let writtenReview = this.parentElement.firstElementChild.innerText
+        let reviewRating = this.parentElement.firstElementChild.nextElementSibling.innerText.slice(0,1)
+
+        let form = this.parentElement
+
+        form.innerHTML = `
+        <form id="review-form">
+            <input type="hidden" value="${id}">
+            <label for="movie-review">Your Review</label>
+            <textarea>${writtenReview}</textarea><br></br>
+            <style>
+            .checked {
+                color: orange;
+            }
+            </style>
+            <div>
+                <label for="movie-stars">Star Rating 1-5</label>
+                    <div id="stars">
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+            </div>
+            <input type="submit" id="update-review-button">
+        </form>
+        `
+        const all = document.querySelectorAll('.fa')
+        all.forEach( star => {
+            star.addEventListener('click', Movie.fillStars)
+        })
+        let button = form.querySelector('#update-review-button')
+        button.addEventListener('click', ReviewApi.handleFetchUpdate)
+        {debugger}
+        
+            
+        // const data
+    }
 
 
 
