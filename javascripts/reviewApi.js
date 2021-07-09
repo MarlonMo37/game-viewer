@@ -73,8 +73,18 @@ class ReviewApi {
         {debugger}
     }
 
-    static handleFetchDelete() {
+    static handleFetchDelete(e) {
         {debugger}
+        fetch(`${ReviewApi.url}/${this.parentElement.querySelector("input").value}`, {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": 'application/json'
+            }
+        })
+        .then(resp => {
+            this.parentElement.remove()
+        })
+        // {debugger}
     }
 
     static getRating(div){
