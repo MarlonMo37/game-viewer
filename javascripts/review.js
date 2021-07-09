@@ -11,7 +11,7 @@ class Review {
     }
 
     static findById(id) {
-        return this.all.find(function(review) { review.id === id})
+        return this.all.find(review => review.id === id)
     }
 
     static findOrCreateBy(review) {
@@ -28,6 +28,28 @@ class Review {
         `
         reviewsDiv().innerHTML += movieHtml
         }
+    }
+
+    update({written_review, rating}) {
+        let review = Review.findById(this.id)
+        review.written_review = written_review
+        review.rating = rating
+        return review
+        {debugger}
+    }
+
+    replaceReview(div) {
+        div.innerHTML = `
+        <h3>${this.written_review}</h3>
+        <h3>${this.rating}/5</h3>
+        <input type="hidden" value="${this.id}">
+
+        <button id="edit-${this.id}-review">Edit Review</button>
+        <button id="delete-${this.id}-review">Delete Review</button>
+        `
+        let reviewId = `edit-${this.id}-review`
+        let shownReview = () => document.getElementById(reviewId)
+        shownReview().addEventListener("click", Review.handleUpdate)
     }
 
     static handleReviewsClick() {
@@ -131,11 +153,5 @@ class Review {
         let button = form.querySelector('#update-review-button')
         button.addEventListener('click', ReviewApi.handleFetchUpdate)
         {debugger}
-        
-            
-        // const data
     }
-
-
-
 }

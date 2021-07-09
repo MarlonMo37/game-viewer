@@ -46,6 +46,30 @@ class ReviewApi {
     }
 
     static handleFetchUpdate(e) {
+        e.preventDefault()
+        let form = this.parentElement
+        const data = {
+            written_review: this.parentElement.querySelector("textarea").value,
+            rating: ReviewApi.getRating(form),
+            id: form.querySelector('input').value
+        }
+
+        fetch(`${ReviewApi.url}/${data.id}`, {
+            method: 'PATCH',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(resp => resp.json())
+        .then(json => {
+            {debugger}
+            let review = Review.findById(json.id)
+            {debugger}
+            let updateReview = review.update(json)
+            {debugger}
+            updateReview.replaceReview(form)
+        })
         {debugger}
     }
 
