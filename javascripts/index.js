@@ -14,6 +14,8 @@ const genreList = document.getElementById("genre-list")
 const reviews = () => document.getElementById("reviews")
 const reviewsList = document.getElementById("reviews-list")
 
+const modeButton = () => document.getElementById("dark-mode-button")
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -23,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     genreButton().addEventListener("click", Genre.handleGenresClick)
     movieButton().addEventListener("click", Movie.handleMovieClick)
     reviewButton().addEventListener("click", Review.handleReviewsClick)
+    modeButton().addEventListener("click", changeBgColor)
 })
 
 function clearLists() {
@@ -31,6 +34,13 @@ function clearLists() {
     movieList.innerText = ""
 }
 
+const changeBgColor = () => {
+    if (document.bgColor == 'white') {
+        document.bgColor = "grey"
+    } else {
+        document.bgColor = "white"
+    }
+}
 
 
 
