@@ -70,7 +70,6 @@ class ReviewApi {
    
             updateReview.replaceReview(form)
         })
-    
     }
 
     static handleFetchDelete(e) {
@@ -84,7 +83,6 @@ class ReviewApi {
         .then(resp => {
             this.parentElement.remove()
         })
-        // {debugger}
     }
 
     static getRating(div){
@@ -97,7 +95,4 @@ class ReviewApi {
         }
         return actualRating   
     }
-
-
-
 }

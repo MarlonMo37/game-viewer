@@ -38,7 +38,7 @@ const changeBgColor = () => {
     if (document.bgColor == 'white') {
         document.bgColor = "grey"
     } else {
-        document.bgColor = "white"
+        document.bgColor = "white`"
     }
 }
 

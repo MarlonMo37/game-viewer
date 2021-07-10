@@ -10,6 +10,4 @@ class MovieApi {
         }))
         .catch(this.handleError)
     }
-
-
 }
